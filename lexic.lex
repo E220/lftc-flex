@@ -1,5 +1,6 @@
 %{
     #include <stdio.h>
+    int lineNr = 0;
 %}
 
 
@@ -57,8 +58,9 @@
 ([+-]?([1-9][0-9]*)(\.[0-9]*[1-9])?|[+-]?0\.[0-9]*[1-9]|0) printf("number const: %s\n", yytext);
 
 " " {}
+\n { lineNr++; printf("\n"); }
 
-. printf("error");
+. printf("error at line: %d\n", lineNr);
 
 %%
 
