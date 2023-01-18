@@ -1,7 +1,8 @@
 %{
     #include <stdio.h>
 %}
-  
+
+
 
 %%
 
@@ -30,6 +31,7 @@
 "write"  printf("reserved: %s\n", yytext);
 "and"  printf("reserved: %s\n", yytext);
 "or"  printf("reserved: %s\n", yytext);
+
 "+"  printf("operator: %s\n", yytext);
 "-"  printf("operator: %s\n", yytext);
 "/"  printf("operator: %s\n", yytext);
@@ -40,6 +42,7 @@
 "!="  printf("operator: %s\n", yytext);
 ">="  printf("operator: %s\n", yytext);
 ">"  printf("operator: %s\n", yytext);
+
 "("  printf("separator: %s\n", yytext);
 ")"  printf("separator: %s\n", yytext);
 "["  printf("separator: %s\n", yytext);
@@ -48,7 +51,13 @@
 "}"  printf("separator: %s\n", yytext);
 "."  printf("separator: %s\n", yytext);
 ","  printf("separator: %s\n", yytext);
+
+[a-zA-Z][a-zA-Z0-9]* printf("identifier: %s\n", yytext);
+\".*\" printf("string const: %s\n", yytext);
+([+-]?([1-9][0-9]*)(\.[0-9]*[1-9])?|[+-]?0\.[0-9]*[1-9]|0) printf("number const: %s\n", yytext);
+
 " " {}
+
 . printf("error");
 
 %%
